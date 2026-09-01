@@ -5,10 +5,11 @@
     <Nullable>disable</Nullable>
     <AssemblyName>AutoRouteGroups</AssemblyName>
     <RootNamespace>AutoRouteGroups</RootNamespace>
-    <VoxelTycoonManagedDirectory>/Users/simonglashauser/Library/Application Support/Steam/steamapps/common/VoxelTycoon/VoxelTycoon.app/Contents/Resources/Data/Managed</VoxelTycoonManagedDirectory>
+    <VoxelTycoonManagedDirectory Condition="'$(VoxelTycoonManagedDirectory)' == '' and $([MSBuild]::IsOSPlatform('OSX'))">$(HOME)/Library/Application Support/Steam/steamapps/common/VoxelTycoon/VoxelTycoon.app/Contents/Resources/Data/Managed</VoxelTycoonManagedDirectory>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="tests/**/*.cs" />
     <Reference Include="VoxelTycoon">
       <HintPath>$(VoxelTycoonManagedDirectory)/VoxelTycoon.dll</HintPath>
       <Private>false</Private>
@@ -27,4 +28,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="ValidateVoxelTycoonManagedDirectory" BeforeTargets="ResolveReferences">
+    <Error
+      Condition="!Exists('$(VoxelTycoonManagedDirectory)/VoxelTycoon.dll')"
+      Text="VoxelTycoon.dll was not found. Set VoxelTycoonManagedDirectory to the game's Managed directory." />
+  </Target>
 </Project>

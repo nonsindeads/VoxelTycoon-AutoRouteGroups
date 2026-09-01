@@ -9,7 +9,7 @@ namespace AutoRouteGroups
     {
         private static readonly HashSet<string> PlacePrefixes = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            "ALT", "BAD", "GROSS", "GROß", "KLEIN", "NEU", "SANKT", "ST"
+            "ALT", "BAD", "GREAT", "GROSS", "GROß", "KLEIN", "LITTLE", "NEU", "NEW", "OLD", "SAINT", "SANKT", "ST"
         };
 
         public static Dictionary<int, string> Build(

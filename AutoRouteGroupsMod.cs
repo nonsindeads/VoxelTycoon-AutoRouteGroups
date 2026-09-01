@@ -306,7 +306,7 @@ namespace AutoRouteGroups
                 {
                     if (vehicle.Route != target)
                     {
-                        VehicleRoute.Set(vehicle, target);
+                        SetRouteKeepingTaskIndex(vehicle, target);
                         result.MovedVehicles++;
                     }
                 }
@@ -407,12 +407,26 @@ namespace AutoRouteGroups
             }
 
             VehicleScheduleTraverseOrder traverseOrder = vehicle.Schedule.TraverseOrder;
+            int taskIndex = vehicle.Schedule.TaskIndex;
             List<RootTask> snapshot = vehicle.Schedule.GetTasks().ToList()
                 .Select(task => task.Clone(null))
                 .ToList();
 
             VehicleRoute.Set(vehicle, null);
             vehicle.Schedule.CopyFrom(snapshot, traverseOrder);
+            vehicle.Schedule.CopyTaskIndexFrom(taskIndex);
+        }
+
+        private static void SetRouteKeepingTaskIndex(Vehicle vehicle, VehicleRoute route)
+        {
+            int taskIndex = vehicle.Schedule.TaskIndex;
+            VehicleRoute.Set(vehicle, route);
+
+            if (!vehicle.Schedule.IsEmpty)
+            {
+                int lastTaskIndex = vehicle.Schedule.GetTasks().Count - 1;
+                vehicle.Schedule.CopyTaskIndexFrom(Math.Min(taskIndex, lastTaskIndex));
+            }
         }
 
         private string BuildRouteName(

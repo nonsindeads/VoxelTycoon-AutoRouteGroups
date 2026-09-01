@@ -2,6 +2,8 @@
 
 Auto Routes uses Voxel Tycoon's native saved routes as named vehicle groups. The in-game controls are in English; this guide is available in English and German.
 
+To build the mod, set the MSBuild property `VoxelTycoonManagedDirectory` to Voxel Tycoon's `Managed` directory. On macOS, the standard Steam installation is detected automatically.
+
 ## English
 
 Three new buttons appear in the three-dot menu:
