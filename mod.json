@@ -1,0 +1,8 @@
+{
+  "Dependencies": null,
+  "Title": "Auto Routes",
+  "Description": "Automatically groups vehicles with the same consist and schedule into named routes. Includes manual execution, optional automatic mode, and protection for manually created routes. / Gruppiert Fahrzeuge mit identischem Verband und Fahrplan automatisch in benannte Routen. Mit manueller Ausführung, abschaltbarer Automatik und Schutz für manuell angelegte Routen.",
+  "Hidden": false,
+  "PublishedFileId": 3793903076,
+  "Tags": [ "Gameplay", "Utils" ]
+}
